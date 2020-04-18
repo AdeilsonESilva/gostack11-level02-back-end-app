@@ -32,13 +32,7 @@ class ImportTransactionsService {
     await new Promise(resolve => parseCSV.on('end', resolve));
 
     for (const transactionCSV of transactionsCSV) {
-      const { title, type, value, category } = transactionCSV;
-      const transaction = await createTransaction.execute({
-        title,
-        type,
-        value,
-        category,
-      });
+      const transaction = await createTransaction.execute(transactionCSV);
 
       transactions.push(transaction);
     }
